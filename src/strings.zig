@@ -391,7 +391,7 @@ pub fn normalizeLabel(allocator: *mem.Allocator, s: []const u8) ![]u8 {
     var buffer = try std.ArrayList(u8).initCapacity(allocator, trimmed.len);
     var last_was_whitespace = false;
 
-    var view = try std.unicode.Utf8View.init(trimmed);
+    var view = std.unicode.Utf8View.initUnchecked(trimmed);
     var it = view.iterator();
     while (it.nextCodepoint()) |cp| {
         var rune = @intCast(i32, cp);
